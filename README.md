@@ -16,7 +16,7 @@ A Calibre-Web version that supports user themes (the theme infrastructure from P
 
 ## Install
 
-1. [Download](https://github.com/tommoors/calibre-web-liquid-theme/archive/refs/tags/liquid.zip) and unzip `liquid.zip`. You get a folder called `liquid`.
+1. [Download](https://github.com/tommoors/calibre-web-liquid-theme/releases/download/liquid/liquid.zip) and unzip `liquid.zip`. You get a folder called `liquid`.
 2. Copy the `liquid` folder into the `themes/` folder next to Calibre-Web's settings database (`app.db`). Create `themes/` if it doesn't exist.
    - Docker: usually `./config/themes/liquid`
    - Or point the `CALIBRE_THEMES_DIR` environment variable to the folder that contains `liquid`.
