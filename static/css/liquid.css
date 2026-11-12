@@ -386,7 +386,8 @@ body.liquid .navbar-toggler:focus { box-shadow: none; }
   }
   body.liquid .row .card.login-card .card-body { padding: 8px 4px !important; }
   /* the book pop-up fills the screen instead of floating with margins */
-  body.liquid .modal-dialog { margin: 0; min-height: 100%; }
+  /* Bootstrap caps .modal-dialog at 500px from 576px wide (tablets in portrait): lift the cap */
+  body.liquid .modal-dialog { margin: 0; min-height: 100%; width: 100%; max-width: none; }
   body.liquid .modal .modal-content { min-height: 100dvh; border: 0; border-radius: 0; }
   body.liquid .modal { --bs-modal-border-radius: 0; --bs-modal-inner-border-radius: 0; }
   body.liquid .page-content .pagination { margin: 20px auto 32px; }
@@ -823,6 +824,11 @@ body.liquid .modal-header { background: transparent; padding: 18px 22px; }
 body.liquid .modal-title { font-weight: 700; color: var(--ink-strong); }
 body.liquid .modal-body { padding: 22px; }
 body.liquid .modal-footer { padding: 14px 22px; }
+/* larger tablets in portrait (768–991px): Bootstrap would show the large
+   pop-up at 500px; use the page width minus the grid gutter instead */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  body.liquid .modal-lg { --bs-modal-width: calc(100vw - 2 * var(--gutter)); }
+}
 body.liquid .modal-backdrop { --bs-backdrop-bg: #000; --bs-backdrop-opacity: 0.22; }
 body.liquid .btn-close { border-radius: var(--radius-capsule); background-color: var(--hover-wash); opacity: 0.8; padding: 10px; }
 @media (prefers-color-scheme: dark) {
