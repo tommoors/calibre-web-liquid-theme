@@ -600,6 +600,26 @@ body.liquid .filterheader .btn {
   padding: 6px 12px;
 }
 
+/* The A–Z letter bar on list pages (categories, authors, series…) is one
+   `.btn-group` that Bootstrap keeps on a single line: with 20+ letters it ran
+   past the screen on tablets and made the whole page scroll sideways. Let the
+   letters wrap inside the bar as equal round keys; the sort and All buttons stay
+   on the first line, the letters follow on as many lines as the width needs. */
+body.liquid .filterheader .btn-group.character {
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 1px;
+  vertical-align: top;
+}
+body.liquid .filterheader .btn-group.character > .btn {
+  flex: 0 0 30px;          /* compact keys: A–Z fits one line from about 1100px wide */
+  height: 32px;
+  padding: 0;
+  justify-content: center;
+  border-radius: var(--radius-capsule);   /* each letter is its own key, not a joined segment */
+  margin: 0;
+}
+
 body.liquid .filterheader .btn:not(.active):is(:hover, :focus-visible) {
   background-color: var(--hover-wash);
   border-color: transparent;
