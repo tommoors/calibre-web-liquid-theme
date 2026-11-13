@@ -4,7 +4,7 @@
   "application": "cps",
   "author": "Tom Moors",
   "description": "Floating glass chrome over your covers, in the spirit of Apple's Liquid Glass. Follows the device's light or dark appearance.",
-  "version": "1.3",
+  "version": "1.4",
   "license": "MIT",
   "options": {
     "parent": "standard",

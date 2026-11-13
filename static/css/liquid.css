@@ -297,6 +297,15 @@ body.liquid .navbar-form[role="search"] .form-control {
   border-radius: var(--radius-capsule) !important;
   color: var(--ink);
 }
+/* style.css fixes `.input-group .form-control, .input-group .btn` at 40px, which
+   overfills the 3px-padded capsule: pin both to 34px so field and button sit flush */
+body.liquid .navbar-form[role="search"] .input-group > :is(.form-control, .btn) {
+  height: 34px;
+  min-height: 34px;
+  font-size: 14px;   /* one size for field and button, so their text shares a baseline */
+  line-height: 20px;
+  padding-block: 0;
+}
 body.liquid .navbar-form[role="search"] .form-control::placeholder { color: var(--ink-muted); }
 body.liquid .navbar-form[role="search"] #query_submit {
   border-radius: var(--radius-capsule) !important;
