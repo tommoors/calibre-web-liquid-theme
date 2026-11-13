@@ -306,6 +306,10 @@ body.liquid .navbar-form[role="search"] .input-group > :is(.form-control, .btn) 
   line-height: 20px;
   padding-block: 0;
 }
+/* style.css gives `.discover .btn` a 5px bottom margin. On the Discover page the
+   body itself has the class `discover`, so every navbar button got it too and the
+   search capsule grew 5px: no vertical margins on buttons in the bar */
+body.liquid .navbar .btn { margin-block: 0; }
 body.liquid .navbar-form[role="search"] .form-control::placeholder { color: var(--ink-muted); }
 body.liquid .navbar-form[role="search"] #query_submit {
   border-radius: var(--radius-capsule) !important;
