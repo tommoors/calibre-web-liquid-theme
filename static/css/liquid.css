@@ -49,6 +49,11 @@ body.liquid {
   --field-border: #86868b;
   --focus-ring: #0066cc;
   --selected-wash: rgba(0, 102, 204, 0.12);
+  --chip-fill: rgba(120, 120, 128, 0.14);
+  --chip-fill-hover: rgba(120, 120, 128, 0.24);
+  --chip-accent-fill: rgba(0, 102, 204, 0.10);
+  --chip-accent-fill-hover: rgba(0, 102, 204, 0.18);
+  --radius-chip: 8px;
 
   /* ambient colour behind the glass */
   --bloom-1: #e3ebf8;
@@ -127,6 +132,10 @@ body.liquid {
     --field-border: #7c7c82;
     --focus-ring: #5aacff;
     --selected-wash: rgba(90, 172, 255, 0.18);
+    --chip-fill: rgba(235, 235, 245, 0.12);
+    --chip-fill-hover: rgba(235, 235, 245, 0.2);
+    --chip-accent-fill: rgba(90, 172, 255, 0.13);
+    --chip-accent-fill-hover: rgba(90, 172, 255, 0.2);
 
     --bloom-1: #111a33;
     --bloom-2: #1f1325;
@@ -952,6 +961,53 @@ body:is(.login, .register).liquid .page-content { padding-bottom: 6vh; }
 /* book detail: rounder cover, airy meta */
 body.liquid .book-meta h2 { font-size: 30px; margin-top: 0; }
 body.liquid .book-meta .author a { font-weight: 600; }
+
+/* Identifiers and tags on the book page are labels, not actions, so they are
+   not capsule buttons. They are compact tinted chips with a rounded-rectangle
+   corner, wrapping with an even 6px gap in both directions (iOS "bordered"
+   small control: tinted fill, coloured label, no border).
+   Identifiers link out: accent tint. Tags: neutral grey fill.
+   26px tall with a 6px gap meets the WCAG 2.2 minimum target size (24px). */
+body.liquid :is(.identifiers, .tags) > p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+body.liquid :is(.identifiers, .tags) > p > .bi {
+  color: var(--ink-muted);
+  font-size: 15px;
+  margin-right: 2px;
+}
+body.liquid :is(.identifiers, .tags) .btn {
+  --bs-btn-padding-x: 10px;
+  --bs-btn-padding-y: 4px;
+  --bs-btn-font-size: 13px;
+  --bs-btn-font-weight: 500;
+  --bs-btn-line-height: 18px;
+  --bs-btn-border-radius: var(--radius-chip);
+  --bs-btn-border-width: 0;
+  margin: 0;
+  min-height: 24px;
+  background-image: none;
+  box-shadow: none;
+}
+body.liquid .identifiers .btn {
+  --bs-btn-bg: var(--chip-accent-fill);
+  --bs-btn-color: var(--accent);
+  --bs-btn-hover-bg: var(--chip-accent-fill-hover);
+  --bs-btn-hover-color: var(--accent);
+  --bs-btn-active-bg: var(--chip-accent-fill-hover);
+  --bs-btn-active-color: var(--accent);
+}
+body.liquid .tags .btn {
+  --bs-btn-bg: var(--chip-fill);
+  --bs-btn-color: var(--ink-strong);
+  --bs-btn-hover-bg: var(--chip-fill-hover);
+  --bs-btn-hover-color: var(--ink-strong);
+  --bs-btn-active-bg: var(--chip-fill-hover);
+  --bs-btn-active-color: var(--ink-strong);
+}
 body.liquid .book-meta .btn-toolbar { margin-bottom: 18px; }
 /* button groups: Bootstrap's own .btn-group rules square only the inner corners
    (and leave a dropdown toggle round), so the capsule radius needs no help here */
