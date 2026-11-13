@@ -600,25 +600,46 @@ body.liquid .filterheader .btn {
   padding: 6px 12px;
 }
 
-/* The A–Z letter bar on list pages (categories, authors, series…) is one
-   `.btn-group` that Bootstrap keeps on a single line: with 20+ letters it ran
-   past the screen on tablets and made the whole page scroll sideways. Let the
-   letters wrap inside the bar as equal round keys; the sort and All buttons stay
-   on the first line, the letters follow on as many lines as the width needs. */
-body.liquid .filterheader .btn-group.character {
+/* The A–Z letter bar on list pages (categories, authors, series…). Calibre-Web
+   draws the letters as one joined `.btn-group` that never wraps: with 20+ letters
+   it ran off the screen on tablets. Making that inner group wrap is not enough:
+   Safari and Chrome size a wrapping inline group differently (Safari squeezed it
+   into a narrow block beside "All"). So the group steps out of the layout
+   (`display: contents`) and the bar becomes one wrapping flex row: sort buttons,
+   All and every letter are siblings, the row fills the available width and only
+   breaks when it runs out of room, the same in every browser.
+   (.d-md-block / .d-md-inline-flex set display with !important, hence the !important here.) */
+body.liquid .filterheader:has(.btn-group.character) {
+  display: flex !important;
   flex-wrap: wrap;
-  max-width: 100%;
+  align-items: center;
   gap: 1px;
-  vertical-align: top;
 }
+body.liquid .filterheader > .btn { margin: 0; }
+body.liquid .filterheader .btn-group.character { display: contents !important; } /* beats .d-md-inline-flex */
+
+/* each letter is its own round key: a 30px circle with the letter centred.
+   26 keys + gaps = 805px, so A–Z stays on one line from an iPad mini in
+   landscape (1133px) upwards and wraps to two even lines on narrower tablets */
 body.liquid .filterheader .btn-group.character > .btn {
-  flex: 0 0 30px;          /* compact keys: A–Z fits one line from about 1100px wide */
-  height: 32px;
-  padding: 0;
+  flex: 0 0 30px;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  border-radius: var(--radius-capsule);   /* each letter is its own key, not a joined segment */
+  width: 30px;
+  height: 30px;
+  padding: 0;
   margin: 0;
+  line-height: 1;
+  border-radius: 50%;
 }
+
+/* the list itself (categories, authors…): a count badge and a name per row. In
+   two columns on a tablet, the badge column (1/12) got narrower than the badge,
+   so names dropped below their count. Keep each row on one line instead. */
+body.liquid :is(#list, #second) > .row { flex-wrap: nowrap; align-items: baseline; }
+body.liquid :is(#list, #second) > .row > .text-start { flex: 0 0 auto; width: auto; min-width: 44px; }
+body.liquid :is(#list, #second) > .row > .text-start + div { flex: 1 1 auto; width: auto; min-width: 0; }
 
 body.liquid .filterheader .btn:not(.active):is(:hover, :focus-visible) {
   background-color: var(--hover-wash);
